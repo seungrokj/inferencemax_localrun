@@ -2,5 +2,8 @@
 ```sh
 git clone https://github.com/seungrokj/inferencemax_localrun.git
 cd inferencemax_localrun
-./run_gptoss.sh
+# vllm
+./run_gptoss.sh vllm
+# atom
+./run_gptoss.sh atom
 ```

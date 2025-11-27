@@ -4,6 +4,7 @@ TP_CONC=("1:4")
 export ISL=1024
 export OSL=1024
 export hf_token=''
+
 for tp_conc in ${TP_CONC[@]}
 do
     export TP=$(echo $tp_conc | awk -F':' '{ print $1 }')
@@ -19,7 +20,7 @@ do
     MAX_MODEL_LEN=2048 \
     RANDOM_RANGE_RATIO=0.8 \
     IMAGE='rocm/7.0:rocm7.0_ubuntu_22.04_vllm_0.10.1_instinct_20250927_rc1' \
-    FRAMEWORK='vllm' \
+    FRAMEWORK=$1 \
     PRECISION='fp4' \
     GITHUB_WORKSPACE=$PWD \
     TP=$TP \

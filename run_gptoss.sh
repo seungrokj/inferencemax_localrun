@@ -5,6 +5,12 @@ export ISL=1024
 export OSL=1024
 export hf_token=''
 
+if [[ $1 == "vllm" ]]; then
+    export IMAGE='rocm/7.0:rocm7.0_ubuntu_22.04_vllm_0.10.1_instinct_20250927_rc1' 
+else
+    export IMAGE='rocm/pytorch-private:atom_dev_1127' 
+fi
+
 for tp_conc in ${TP_CONC[@]}
 do
     export TP=$(echo $tp_conc | awk -F':' '{ print $1 }')
@@ -19,7 +25,7 @@ do
     OSL=$OSL \
     MAX_MODEL_LEN=2048 \
     RANDOM_RANGE_RATIO=0.8 \
-    IMAGE='rocm/7.0:rocm7.0_ubuntu_22.04_vllm_0.10.1_instinct_20250927_rc1' \
+    IMAGE=$IMAGE \
     FRAMEWORK=$1 \
     PRECISION='fp4' \
     GITHUB_WORKSPACE=$PWD \
